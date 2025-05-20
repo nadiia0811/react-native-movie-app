@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Image, ImageBackground, View } from 'react-native';
+import { Image, ImageBackground, Platform, View } from 'react-native';
 import { images } from '@/constants/images';
 import { icons } from '@/constants/icons';
 import { Text } from 'react-native';
@@ -8,32 +8,76 @@ import { Text } from 'react-native';
 
 interface TabIconProps {
   title: string;
-  icon: string;
+  icon: string; 
   focused: boolean;
 }
 
 const TabIcon = ({ title, icon, focused }: TabIconProps) => {
-    if (focused) {
-        return  <ImageBackground 
-                  style={{height: 54, width: 112, alignItems: "center"}}
-                  source={images.highlight}
-                  className="flex flex-row w-full mt-4 justify-center rounded-full overflow-hidden" 
-                >
-                    <Image source={icon} 
-                        tintColor="#151312"
-                        className="size-5"
-                    />
-                    <Text className="text-secondary text-base font-semibold ml-2">{title}</Text>
-                </ImageBackground>  
-    }
+  if (focused) {
     return (
-        <View className="rounded-full justify-center items-center size-full flex">
-          <Image source={icon}
-                 tintColor="#a8b5db"
-                 className="size-5 mt-4" />  
-        </View>
-    )
+      <ImageBackground
+        source={images.highlight}
+        style={{
+          height: 52,
+          minWidth: 112,
+          paddingHorizontal: 16,
+          borderRadius: 999,
+          marginTop: Platform.OS === "web" ? 3 : 14,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+        }}
+        imageStyle={{
+          resizeMode: "stretch",
+          borderRadius: 999,
+        }}
+      >
+        <Image
+          source={icon}
+          style={{
+            width: 20,
+            height: 20,
+            tintColor: "#151312",
+          }}
+          resizeMode="contain"
+        />
+        <Text
+          style={{
+            color: "#151312",
+            fontSize: 16,
+            fontWeight: "600",
+            marginLeft: 8,
+          }}
+        >
+          {title}
+        </Text>
+      </ImageBackground>
+    );
+  }
+
+  return (
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: Platform.OS === "web" ? 0 : 16,
+        height: 52,
+      }}
+    >
+      <Image
+        source={icon}
+        style={{
+          width: 20,
+          height: 20,
+          tintColor: "#a8b5db",
+        }}
+        resizeMode="contain"
+      />
+    </View>
+  );
 };
+
   
 const _Layout = () => {
   
