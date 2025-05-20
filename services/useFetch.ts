@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 
-interface UseFetchProps<T> {
-  fetchFunction: () => Promise<T>
-}
 
-const useFetch = <T>({ fetchFunction }: UseFetchProps<T>, autoFetch = true) => {
+const useFetch = <T>(fetchFunction: () => Promise<T>, autoFetch = true) => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
