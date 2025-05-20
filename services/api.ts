@@ -7,11 +7,9 @@ export const TMDB_CONFIG = {
   },
 };
 
-interface FetchMoviesProps {
-  searchQuery?: string;
-}
 
-export const fetchMovies = async ({ searchQuery }: FetchMoviesProps) => {
+
+export const fetchMovies = async (searchQuery?: string) => {
   const endPoint = searchQuery ? 
     `${TMDB_CONFIG.BASE_URL}/search/movie?query=${encodeURIComponent(searchQuery)}` 
     : `${TMDB_CONFIG.BASE_URL}/discover/movie?sort_by=popularity.desc`;
